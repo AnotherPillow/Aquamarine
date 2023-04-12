@@ -14,4 +14,4 @@ A Stardew Valley Save Editor
 
 ![where to click](https://i.imgur.com/vXxJwDQ.png)
 
-1. Find the compiled output in `bin\Release\net6.0-windows\win-x64\publish\win-x64`
+3. Find the compiled output in `bin\Release\net6.0-windows\win-x64\publish\win-x64`
