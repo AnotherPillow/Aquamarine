@@ -7,6 +7,12 @@ A Stardew Valley Save Editor
 1. Download the latest release from [here](https://github.com/anotherpillow/Aquamarine/releases)
 1. Run `Aquamarine.exe`.
 
+## Backups
+
+Aquamarine will automatically create a backup of your save file when you load it. If you wish, you can always create a backup manually by clicking the "Backup" button.
+
+Backups are stored in `%appdata%\StardewValley\Saves\Aquamarine`
+
 ## Compiling
 
 1. Clone/Download the source.

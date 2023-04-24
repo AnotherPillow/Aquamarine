@@ -60,6 +60,7 @@
             this.HairColorDialog = new System.Windows.Forms.ColorDialog();
             this.HairColourColourDialogBtn = new System.Windows.Forms.Button();
             this.HairColourLbl = new System.Windows.Forms.Label();
+            this.backupBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // SaveFileBrowseBtn
@@ -331,11 +332,22 @@
             this.HairColourLbl.TabIndex = 31;
             this.HairColourLbl.Text = "Hair Colour";
             // 
+            // backupBtn
+            // 
+            this.backupBtn.Location = new System.Drawing.Point(713, 41);
+            this.backupBtn.Name = "backupBtn";
+            this.backupBtn.Size = new System.Drawing.Size(75, 23);
+            this.backupBtn.TabIndex = 32;
+            this.backupBtn.Text = "Backup";
+            this.backupBtn.UseVisualStyleBackColor = true;
+            this.backupBtn.Click += new System.EventHandler(this.backupBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.backupBtn);
             this.Controls.Add(this.HairColourLbl);
             this.Controls.Add(this.HairColourColourDialogBtn);
             this.Controls.Add(this.PetTypeLbl);
@@ -408,5 +420,6 @@
         private ColorDialog HairColorDialog;
         private Button HairColourColourDialogBtn;
         private Label HairColourLbl;
+        private Button backupBtn;
     }
 }

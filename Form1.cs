@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Xml;
+using System.IO;
 
 
 namespace Aquamarine
@@ -38,7 +39,7 @@ namespace Aquamarine
                 return;
 
             string fp = openFileDialog1.FileName;
-            string fn = System.IO.Path.GetFileName(fp);
+            string fn = Path.GetFileName(fp);
 
             Match match = fileNameRegex.Match(fn);
             if (!match.Success)
@@ -47,8 +48,16 @@ namespace Aquamarine
             
             FileSaveName = fn;
             FileSaveNameLbl.Text = fn;
+            string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string backupsDir = appdata + @"\StardewValley\Saves\Aquamarine";
+            
+            if (!Directory.Exists(backupsDir))
+            {
+                Directory.CreateDirectory(backupsDir);
+            }
 
             PopulateFields();
+            RecursiveSaveFileCheck(fn);
         }
 
         private void PopulateFields()
@@ -127,6 +136,40 @@ namespace Aquamarine
             string gameVersion = gameVersionEls[0].InnerXml;
             GameVersionTxt.Text = gameVersion;
 
+
+
+
+        }
+
+        private void RecursiveSaveFileCheck(String name = "Unknown", int count = 0)
+        {
+            //check if the path exists
+            string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string backupsDir = appdata + @"\StardewValley\Saves\Aquamarine\";
+
+            string saveFile = backupsDir + name;
+            //System.Windows.Forms.MessageBox.Show(count.ToString());
+            if (count > 0) saveFile += $" ({count})";
+            saveFile += ".xml";
+            //System.Windows.Forms.MessageBox.Show(saveFile);
+
+            if (!File.Exists(saveFile))
+            {
+                //string savepath = appdata + @"\StardewValley\Saves\" + FileSaveName + @"\" + FileSaveName;
+                //System.Windows.Forms.MessageBox.Show($"Copying {savepath} to {saveFile}");
+                //                File.Copy(savepath, saveFile); doesn't work for some reason
+
+                //write nothing to it
+                var f = File.Create(saveFile);
+                f.Close();
+                save.Save(saveFile);
+                
+
+
+                return;
+            } else
+                RecursiveSaveFileCheck(name, count + 1);
+            
 
 
 
@@ -234,6 +277,11 @@ namespace Aquamarine
             XmlNodeList gameVersionEls = save.GetElementsByTagName("gameVersion");
             gameVersionEls[0].InnerXml = GameVersionTxt.Text;
             gameVersionEls[1].InnerXml = GameVersionTxt.Text;
+        }
+
+        private void backupBtn_Click(object sender, EventArgs e)
+        {
+            RecursiveSaveFileCheck(FileSaveName);
         }
     }
 }
